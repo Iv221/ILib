@@ -1,11 +1,10 @@
 package de.iv.iutils.menus;
 
 import de.iv.iutils.exceptions.MenuManagerException;
-import de.iv.iutils.exceptions.MenuManagerNotSetupException;
+import de.iv.iutils.exceptions.ManagerSetupException;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredListener;
 
@@ -47,7 +46,7 @@ public class MenuManager {
      * @param menuClass - The class of the menu that will be opened
      * @param p - The player the menu is displayed to
      */
-    public static void openMenu(Class<? extends Menu> menuClass, Player p) throws MenuManagerException, MenuManagerNotSetupException {
+    public static void openMenu(Class<? extends Menu> menuClass, Player p) throws MenuManagerException, ManagerSetupException {
         try {
             menuClass.getConstructor(InventoryMapper.class).newInstance(getMapper(p)).open();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
@@ -57,9 +56,9 @@ public class MenuManager {
     }
 
 
-    public static InventoryMapper getMapper(Player p) throws MenuManagerException, MenuManagerNotSetupException{
+    public static InventoryMapper getMapper(Player p) throws MenuManagerException, ManagerSetupException {
         if(!isSetup) {
-            throw new MenuManagerNotSetupException();
+            throw new ManagerSetupException();
         }
 
         InventoryMapper mapper;
