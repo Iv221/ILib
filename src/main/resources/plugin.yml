@@ -1,0 +1,6 @@
+name: Ilib
+version: '${project.version}'
+main: de.iv.iutils.Main
+api-version: 1.19
+authors: [ Iv ]
+description: Library for no pain in the arse
